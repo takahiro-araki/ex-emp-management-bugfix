@@ -52,4 +52,9 @@ public class EmployeeService {
 	public void update(Employee employee) {
 		employeeRepository.update(employee);
 	}
+	
+	public List<Employee> findAmbiguous(String name){
+		List<Employee> employeeList=employeeRepository.findAmbiguous(name);
+		return employeeList;
+	}
 }

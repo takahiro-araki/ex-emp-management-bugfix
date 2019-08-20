@@ -99,7 +99,7 @@ public class AdministratorController {
 	public String toLogin() {
 		return "administrator/login";
 	}
-
+	
 	/**
 	 * ログインします.
 	 * 

@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import jp.co.sample.emp_management.domain.Administrator;
-import jp.co.sample.emp_management.domain.Employee;
 
 /**
  * administratorsテーブルを操作するリポジトリ.
@@ -81,15 +80,6 @@ public class AdministratorRepository {
 		return administratorList.get(0);
 	}
 	
-	/**
-	 *管理者情報を全件取得します.
-	 * 
-	 * @return　管理者情報のリスト
-	 */
-	public List<Administrator> findAll() {
-		String sql = "SELECT id,name,mail_address,password FROM administrators ";
-		List<Administrator> developmentList = template.query(sql, ADMINISTRATOR_ROW_MAPPER);
-		return developmentList;
-	}
+	
 
 }

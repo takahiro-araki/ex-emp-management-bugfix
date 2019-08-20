@@ -53,6 +53,18 @@ public class EmployeeController {
 		return "employee/list";
 	}
 	
+	
+	@RequestMapping("/findAmbiguous")
+	public String findAmbiguous(String name,Model model) {
+		List<Employee> employeelist=employeeService.findAmbiguous(name);
+		model.addAttribute("employeeList",employeelist);
+		return "employee/list";
+		
+	}
+	
+	
+	
+	
 	/////////////////////////////////////////////////////
 	// ユースケース：従業員詳細を表示する
 	/////////////////////////////////////////////////////
