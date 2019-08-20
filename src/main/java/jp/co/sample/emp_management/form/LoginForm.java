@@ -2,7 +2,6 @@ package jp.co.sample.emp_management.form;
 
 import javax.validation.constraints.Size;
 
-
 /**
  * ログイン時に使用するフォーム.
  * 
@@ -10,11 +9,11 @@ import javax.validation.constraints.Size;
  * 
  */
 public class LoginForm {
-	
-	
+
+	/**メールアドレス*/
 	private String mailAddress;
+	/**パスワード*/
 	private String password;
-	
 
 	public String getMailAddress() {
 		return mailAddress;

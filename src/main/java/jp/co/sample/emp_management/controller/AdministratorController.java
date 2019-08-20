@@ -72,20 +72,18 @@ public class AdministratorController {
 		if (result.hasErrors()) {
 			return toInsert();
 		}
-		
+
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
 		Administrator existingAdministrator = administratorService.findByMailAddress(administrator.getMailAddress());
-		if(existingAdministrator !=null) {
-				model.addAttribute("error", "そのメールアドレスはすでに使用されています。");
-				return "administrator/insert";
-			}
-		administratorService.insert(administrator);	
+		if (existingAdministrator != null) {
+			model.addAttribute("error", "そのメールアドレスはすでに使用されています。");
+			return "administrator/insert";
+		}
+		administratorService.insert(administrator);
 		return "redirect:/";
 	}
-		
-	
 
 	/////////////////////////////////////////////////////
 	// ユースケース：ログインをする
@@ -99,7 +97,7 @@ public class AdministratorController {
 	public String toLogin() {
 		return "administrator/login";
 	}
-	
+
 	/**
 	 * ログインします.
 	 * 
@@ -114,7 +112,7 @@ public class AdministratorController {
 			model.addAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
 			return toLogin();
 		}
-		session.setAttribute("administratorName",administrator.getName());
+		session.setAttribute("administratorName", administrator.getName());
 		return "forward:/employee/showList";
 	}
 
