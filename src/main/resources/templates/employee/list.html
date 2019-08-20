@@ -26,7 +26,7 @@
 						aria-expanded="false">
 						<span class="sr-only">Toggle navigation</span> <span
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
+							class="icon-bar"></spanx1>
 					</button>
 					<a class="navbar-brand" href="list.html"
 						th:href="@{/employee/showList}"> <!-- 企業ロゴ --> <img
@@ -69,7 +69,7 @@
 
 				<!-- ここにモックのtable要素を貼り付けます -->
 				<form th:action="@{/employee/findAmbiguous}" th:method="post">
-					<span>お名前検索：</span><input type="text" name="name"><br>
+					<span>お名前検索：</span><input type="text" name="name"><span th:text="${session.notFound}"></span><br>
 					<button>送信</button>
 				</form>
 				<table class="table table-striped">

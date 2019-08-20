@@ -2,6 +2,8 @@ package jp.co.sample.emp_management.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,9 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private HttpSession session;
 
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
@@ -57,8 +62,11 @@ public class EmployeeController {
 	public String findAmbiguous(String name, Model model) {
 		List<Employee> employeelist = employeeService.findAmbiguous(name);
 		model.addAttribute("employeeList", employeelist);
+		if(employeelist.size()<=0) {
+			session.setAttribute("notFound","1件もありませんでした。");
+			return "redirect:/employee/showList";
+		}
 		return "employee/list";
-
 	}
 
 	/////////////////////////////////////////////////////
