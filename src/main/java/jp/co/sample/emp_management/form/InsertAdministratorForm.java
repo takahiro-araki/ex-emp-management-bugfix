@@ -20,7 +20,7 @@ public class InsertAdministratorForm {
 	@Size(min = 1, max = 127, message = "パスワードは１文字以上127文字以内で記載してください。")
 	private String password;
 	/**確認用パスワード*/
-	@Size(min = 1, max = 127, message = "パスワードは１文字以上127文字以内で記載してください。")
+	@Size(min = 1, max = 127, message = "パスワードが違います。")
 	private String password2;
 
 	public String getPassword2() {
