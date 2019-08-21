@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,23 +74,24 @@ public class AdministratorController {
 		if (result.hasErrors()) {
 			return toInsert();
 		}
-		if(!(form.getPassword2().equals(form.getPassword()))) {
-			return "administrator/insert";
-		}
-		
+
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
 		Administrator existingAdministrator = administratorService.findByMailAddress(administrator.getMailAddress());
 		if (existingAdministrator != null) {
-			model.addAttribute("error", "そのメールアドレスはすでに使用されています。");
+			FieldError fieldError=new FieldError(result.getObjectName(),"mailAddress","そのメールアドレスはすでに使用されています。");
+			result.addError(fieldError);
+			return toInsert() ;
 			
-			return "administrator/insert";
 		}
+//		if(!(form.getPassword2().equals(form.getPassword()))) {
+//		return "administrator/insert";
+//	}
 		administratorService.insert(administrator);
-		return "redirect:/";
+		return "administrator/login";
 	}
-
+	
 	/////////////////////////////////////////////////////
 	// ユースケース：ログインをする
 	/////////////////////////////////////////////////////
@@ -119,7 +122,6 @@ public class AdministratorController {
 		session.setAttribute("administratorName", administrator.getName());
 		return "forward:/employee/showList";
 	}
-
 	/////////////////////////////////////////////////////
 	// ユースケース：ログアウトをする
 	/////////////////////////////////////////////////////
