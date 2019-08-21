@@ -73,6 +73,9 @@ public class AdministratorController {
 	public String insert(@Validated InsertAdministratorForm form, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return toInsert();
+			
+			
+			
 		}
 
 		Administrator administrator = new Administrator();
@@ -85,9 +88,11 @@ public class AdministratorController {
 			return toInsert() ;
 			
 		}
-//		if(!(form.getPassword2().equals(form.getPassword()))) {
-//		return "administrator/insert";
-//	}
+		if(!(form.getPassword2().equals(form.getPassword()))) {
+		FieldError fieldError=new FieldError(result.getObjectName(),"password2","パスワードは同じにしてください。");
+		result.addError(fieldError);
+		return toInsert() ;
+	}
 		administratorService.insert(administrator);
 		return "administrator/login";
 	}
